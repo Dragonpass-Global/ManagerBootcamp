@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dragonpass | Manager Bootcamp Facilitator Brief</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
@@ -25,86 +27,84 @@
         .text-accent { color: var(--dp-accent); }
         .bg-accent { background-color: var(--dp-accent); }
         
-        /* Logo Fixes */
-        .nav-logo {
-            height: 32px;
-            width: auto;
-            object-fit: contain;
-        }
-        .hero-logo {
+        .nav-logo { height: 32px; width: auto; object-fit: contain; }
+        .hero-logo { width: 100%; max-width: 400px; height: auto; object-fit: contain; margin-bottom: 2rem; }
+
+        /* Impact Scrubber */
+        #impact-slider {
+            -webkit-appearance: none;
             width: 100%;
-            max-width: 400px;
-            height: auto;
-            object-fit: contain;
-            margin-bottom: 2rem;
+            height: 4px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 5px;
+            outline: none;
         }
-        @media (max-width: 768px) {
-            .hero-logo { max-width: 280px; }
+        #impact-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 24px;
+            height: 24px;
+            background: var(--dp-accent);
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 0 15px var(--dp-accent);
         }
 
-        /* Scroll Indicator Animation */
+        /* Structure Styling */
+        .sprint-container {
+            position: relative;
+            padding: 40px 30px;
+            border: 1px dashed rgba(255,255,255,0.15);
+            border-radius: 24px;
+            background: rgba(255,255,255,0.01);
+        }
+        .cycle-badge {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--dp-accent);
+            padding: 4px 20px;
+            border-radius: 20px;
+            font-weight: 800;
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            box-shadow: 0 4px 15px rgba(250, 74, 61, 0.3);
+            z-index: 10;
+        }
+        .structure-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 24px;
+            border-radius: 16px;
+            transition: all 0.4s ease;
+            height: 100%;
+        }
+        .active-card {
+            border-color: var(--dp-accent);
+            background: rgba(250, 74, 61, 0.08);
+            transform: translateY(-5px);
+        }
+        .progress-track {
+            width: 100%;
+            height: 2px;
+            background: rgba(255,255,255,0.1);
+            position: relative;
+            margin-top: 40px;
+        }
+        #progress-bar {
+            position: absolute;
+            height: 100%;
+            background: var(--dp-accent);
+            width: 0%;
+            box-shadow: 0 0 10px var(--dp-accent);
+        }
+
         @keyframes bounce {
             0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
             40% {transform: translateY(-10px);}
             60% {transform: translateY(-5px);}
         }
-        .scroll-indicator {
-            animation: bounce 2s infinite;
-        }
-
-        /* Iterative Loop Styling */
-        .loop-container {
-            border: 2px dashed rgba(255,255,255,0.15);
-            border-radius: 24px;
-            padding: 40px;
-            position: relative;
-            background: rgba(255,255,255,0.01);
-        }
-        .loop-badge {
-            position: absolute;
-            top: -15px;
-            right: 40px;
-            background: var(--dp-accent);
-            color: white;
-            padding: 4px 20px;
-            border-radius: 20px;
-            font-weight: 800;
-            font-size: 1.2rem;
-            box-shadow: 0 4px 15px rgba(250, 74, 61, 0.4);
-        }
-
-        .structure-card {
-            background: rgba(255,255,255,0.03);
-            border: 1px solid rgba(255,255,255,0.1);
-            padding: 30px;
-            border-radius: 16px;
-            height: 100%;
-        }
-
-        .module-card {
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        .module-card:hover {
-            transform: translateY(-5px);
-            background: rgba(19, 74, 97, 0.25);
-        }
-
-        .stat-card {
-            background: linear-gradient(145deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%);
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .video-container {
-            position: relative;
-            padding-bottom: 56.25%;
-            height: 0;
-            overflow: hidden;
-            border-radius: 20px;
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-        .video-container iframe {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-        }
+        .scroll-indicator { animation: bounce 2s infinite; }
     </style>
 </head>
 <body class="antialiased font-[400]">
@@ -113,25 +113,18 @@
     <nav class="p-6 flex justify-between items-center sticky top-0 bg-[#0A2333]/95 backdrop-blur-md z-50 border-b border-white/10">
         <img src="https://lh3.googleusercontent.com/d/1rBp_LTJuenhQflR1woUzA6Ep4e_jWw7I" alt="Dragonpass Logo" class="nav-logo">
         <div class="hidden md:flex space-x-8 text-[10px] font-bold uppercase tracking-[0.2em]">
-            <a href="#data" class="hover:text-accent transition">The Gap</a>
-            <a href="#video" class="hover:text-accent transition">Trailer</a>
+            <a href="#gap" class="hover:text-accent transition">The Gap</a>
             <a href="#modules" class="hover:text-accent transition">Muscles</a>
             <a href="#structure" class="hover:text-accent transition">Structure</a>
             <a href="https://dragonpassuk-my.sharepoint.com/:b:/g/personal/gareth_ogden_dragonpass_com/IQAXqR34ZEAsQbupRmL1tgxtAfK8FEdnmBH0YfuiO4Q_vw4?e=VX5Huo" target="_blank" class="text-accent underline decoration-2 underline-offset-4">White Paper</a>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <header class="relative min-h-[95vh] flex flex-col items-center justify-center px-6 text-center">
+    <!-- Hero -->
+    <header class="relative min-h-[90vh] flex flex-col items-center justify-center px-6 text-center">
         <img src="https://lh3.googleusercontent.com/d/1vpIwCYBeUexg-kAbqLLRV5_j23dIRRDM" alt="Dragonpass Full Logo" class="hero-logo">
-        
-        <h1 class="text-5xl md:text-8xl font-800 mb-8 leading-tight tracking-tight">
-            Manager <br class="hidden md:block"> <span class="text-accent">Bootcamp</span>
-        </h1>
-        <p class="text-base md:text-2xl text-gray-300 mb-12 font-light max-w-3xl mx-auto leading-relaxed">
-            Standardising high-performance management through evidence-based analysis and practical application.
-        </p>
-        
+        <h1 class="text-5xl md:text-8xl font-800 mb-8 leading-tight tracking-tight">Manager <span class="text-accent">Bootcamp</span></h1>
+        <p class="text-base md:text-2xl text-gray-300 mb-12 font-light max-w-3xl mx-auto leading-relaxed">Building the Manager Muscle that matters.</p>
         <div class="absolute bottom-10 flex flex-col items-center gap-2 text-gray-500">
             <span class="text-[10px] font-bold uppercase tracking-widest">Scroll to explore</span>
             <i class="fa-solid fa-chevron-down scroll-indicator text-accent"></i>
@@ -139,34 +132,30 @@
     </header>
 
     <!-- 1. The Management Gap -->
-    <section id="data" class="py-32 px-6 bg-white/[0.02]">
+    <section id="gap" class="py-32 px-6 bg-white/[0.02]">
         <div class="max-w-6xl mx-auto">
-            <div class="text-center mb-20">
+            <div class="text-center mb-16">
                 <h2 class="text-4xl font-800 mb-6 tracking-tight">The Management Gap</h2>
-                <p class="text-gray-400 max-w-2xl mx-auto font-light leading-relaxed">
-                    Management is our single biggest lever for organisational performance. 
-                    <span class="text-white block mt-4 font-medium italic">Global performance data indicates that the standard of management remains the primary reason for employee turnover and disengagement.</span>
+                <p class="text-gray-400 max-w-2xl mx-auto font-light leading-relaxed mb-12">
+                    Management is our single biggest lever for organisational performance. Use the scrubber to see the impact of management friction.
                 </p>
-            </div>
-
-            <div class="grid md:grid-cols-3 gap-8 mb-20">
-                <div class="stat-card p-10 rounded-2xl text-center">
-                    <div class="text-6xl font-800 text-accent mb-4">69%</div>
-                    <p class="text-sm text-gray-300 font-light">of managers are uncomfortable providing direct feedback to their teams.</p>
+                <div class="bg-white/5 p-8 md:p-12 rounded-3xl border border-white/10 mb-8 max-w-4xl mx-auto">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+                        <div class="text-center">
+                            <div id="stat-1" class="text-5xl md:text-6xl font-800 text-accent">0%</div>
+                            <p class="text-[10px] uppercase font-bold tracking-widest mt-2 opacity-50">Feedback Friction</p>
+                        </div>
+                        <div class="text-center">
+                            <div id="stat-2" class="text-5xl md:text-6xl font-800 text-accent">0%</div>
+                            <p class="text-[10px] uppercase font-bold tracking-widest mt-2 opacity-50">Employee Overwhelm</p>
+                        </div>
+                        <div class="text-center">
+                            <div id="stat-3" class="text-5xl md:text-6xl font-800 text-accent">0%</div>
+                            <p class="text-[10px] uppercase font-bold tracking-widest mt-2 opacity-50">Manager-Led Attrition</p>
+                        </div>
+                    </div>
+                    <input type="range" id="impact-slider" min="0" max="100" value="0" class="cursor-pointer">
                 </div>
-                <div class="stat-card p-10 rounded-2xl text-center">
-                    <div class="text-6xl font-800 text-accent mb-4">75%</div>
-                    <p class="text-sm text-gray-300 font-light">of companies are currently struggling with overwhelmed employees.</p>
-                </div>
-                <div class="stat-card p-10 rounded-2xl text-center">
-                    <div class="text-6xl font-800 text-accent mb-4">50%</div>
-                    <p class="text-sm text-gray-300 font-light">of people who quit their jobs cite their manager as the primary reason.</p>
-                </div>
-            </div>
-
-            <div class="text-center">
-                <div class="inline-block h-12 w-px bg-accent mb-6"></div>
-                <h3 class="text-2xl font-700 mb-4">To address this, we are introducing...</h3>
             </div>
         </div>
     </section>
@@ -175,12 +164,12 @@
     <section id="video" class="py-24 px-6 bg-[#081b27]">
         <div class="max-w-5xl mx-auto">
             <div class="flex flex-col md:flex-row items-center justify-between mb-12 gap-6">
-                <h2 class="text-3xl font-700 text-accent">The Vision</h2>
+                <h2 class="text-3xl font-700 text-accent">The Trailer</h2>
                 <div class="h-px flex-grow bg-white/10 mx-8 hidden md:block"></div>
                 <div class="text-gray-500 font-mono text-xs tracking-widest uppercase">Duration: 01:00</div>
             </div>
-            <div class="video-container">
-                <iframe src="https://drive.google.com/file/d/1dC1rREoBJPjnQ76hxgu9zkv_Bza2d_Fy/preview" allow="autoplay"></iframe>
+            <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1);">
+                <iframe src="https://drive.google.com/file/d/1dC1rREoBJPjnQ76hxgu9zkv_Bza2d_Fy/preview" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allow="autoplay"></iframe>
             </div>
         </div>
     </section>
@@ -190,38 +179,33 @@
         <div class="max-w-6xl mx-auto">
             <div class="text-center mb-20">
                 <h2 class="text-4xl md:text-5xl font-800 mb-6 tracking-tight">The Core Muscles</h2>
-                <p class="text-gray-400 text-lg max-w-2xl mx-auto font-light leading-relaxed">
-                    Three modules connected by a single, vital vehicle: <span class="text-white font-semibold italic">One-to-Ones</span>.
-                </p>
+                <p class="text-gray-400 text-lg max-w-2xl mx-auto font-light leading-relaxed">Three modules connected by a single vehicle: <span class="text-white font-semibold italic">One-to-Ones</span>.</p>
             </div>
-
             <div class="grid lg:grid-cols-3 gap-10">
-                <div class="module-card p-10 bg-white/5 rounded-2xl border border-white/10 flex flex-col h-full">
-                    <div class="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center text-accent font-800 mb-8">01</div>
+                <div class="bg-white/5 p-10 rounded-2xl border border-white/10 flex flex-col h-full">
+                    <div class="text-accent font-800 mb-8">01</div>
                     <h3 class="text-2xl font-700 mb-6 leading-tight">Defining & Setting Expectations</h3>
-                    <p class="text-gray-400 mb-8 leading-relaxed font-light flex-grow">Eliminating ambiguity through Role Maturity Assessments and the Triad of Expectations.</p>
+                    <p class="text-gray-400 mb-8 text-sm leading-relaxed font-light flex-grow">Eliminating ambiguity through Role Maturity Assessments and the Triad of Expectations.</p>
                     <div class="space-y-4 pt-6 border-t border-white/5 text-xs font-medium text-gray-300">
                         <div class="flex items-center gap-3"><i class="fa-solid fa-microchip text-accent/60"></i> Maturity Diagnostics</div>
                         <div class="flex items-center gap-3"><i class="fa-solid fa-robot text-accent/60"></i> AI KSB Calibration</div>
                         <div class="flex items-center gap-3"><i class="fa-solid fa-compass text-accent/60"></i> The OCT Framework</div>
                     </div>
                 </div>
-
-                <div class="module-card p-10 bg-white/5 rounded-2xl border border-white/10 flex flex-col h-full">
-                    <div class="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center text-accent font-800 mb-8">02</div>
+                <div class="bg-white/5 p-10 rounded-2xl border border-white/10 flex flex-col h-full">
+                    <div class="text-accent font-800 mb-8">02</div>
                     <h3 class="text-2xl font-700 mb-6 leading-tight">Productive Conversations</h3>
-                    <p class="text-gray-400 mb-8 leading-relaxed font-light flex-grow">Reframing difficult meetings into objective performance dialogues linked to pre-set standards.</p>
+                    <p class="text-gray-400 mb-8 text-sm leading-relaxed font-light flex-grow">Reframing difficult meetings into objective performance dialogues linked to pre-set standards.</p>
                     <div class="space-y-4 pt-6 border-t border-white/5 text-xs font-medium text-gray-300">
                         <div class="flex items-center gap-3"><i class="fa-solid fa-shield-halved text-accent/60"></i> Conflict Neutralisation</div>
                         <div class="flex items-center gap-3"><i class="fa-solid fa-bolt text-accent/60"></i> High-Utility Feedback</div>
                         <div class="flex items-center gap-3"><i class="fa-solid fa-gauge-high text-accent/60"></i> Performance Steering</div>
                     </div>
                 </div>
-
-                <div class="module-card p-10 bg-white/5 rounded-2xl border border-white/10 flex flex-col h-full">
-                    <div class="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center text-accent font-800 mb-8">03</div>
+                <div class="bg-white/5 p-10 rounded-2xl border border-white/10 flex flex-col h-full">
+                    <div class="text-accent font-800 mb-8">03</div>
                     <h3 class="text-2xl font-700 mb-6 leading-tight">High Performing Teams</h3>
-                    <p class="text-gray-400 mb-8 leading-relaxed font-light flex-grow">Moving beyond professional politeness to build vulnerability-based trust and peer accountability.</p>
+                    <p class="text-gray-400 mb-8 text-sm leading-relaxed font-light flex-grow">Moving beyond professional politeness to build vulnerability-based trust and peer accountability.</p>
                     <div class="space-y-4 pt-6 border-t border-white/5 text-xs font-medium text-gray-300">
                         <div class="flex items-center gap-3"><i class="fa-solid fa-handshake-angle text-accent/60"></i> Vulnerability-Based Trust</div>
                         <div class="flex items-center gap-3"><i class="fa-solid fa-fire-flame-curved text-accent/60"></i> Healthy Ideological Conflict</div>
@@ -232,7 +216,7 @@
         </div>
     </section>
 
-    <!-- 4. The Structure -->
+    <!-- 4. The Delivery Structure -->
     <section id="structure" class="py-32 px-6 bg-white/[0.02]">
         <div class="max-w-7xl mx-auto">
             <div class="mb-20 text-center">
@@ -240,41 +224,40 @@
                 <p class="text-gray-400 font-light max-w-2xl mx-auto">An iterative sprint model designed to ensure activation, not just attendance.</p>
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
                 <div class="lg:col-span-9">
-                    <div class="loop-container">
-                        <div class="loop-badge">X3</div>
+                    <div class="sprint-container h-full">
+                        <div id="cycle-badge" class="cycle-badge uppercase">Cycle 1 / 3</div>
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                            <div class="structure-card">
+                            <div class="structure-card" id="phase-1">
                                 <div class="text-accent font-bold text-[10px] tracking-widest mb-4 uppercase">Phase 01</div>
-                                <h4 class="font-700 text-lg mb-3">Pre-Learning</h4>
-                                <p class="text-xs text-gray-400 leading-relaxed mb-6">Introduction of content and baseline capability diagnostics.</p>
-                                <div class="text-[10px] font-bold text-gray-500 uppercase">20-30 Mins</div>
+                                <h4 class="font-700 text-lg mb-2">Pre-Learning</h4>
+                                <p class="text-[11px] text-gray-400 leading-relaxed mb-4">Introduction of content and baseline capability diagnostics.</p>
+                                <div class="text-[10px] font-bold text-gray-500 uppercase mt-auto">20-30 Mins</div>
                             </div>
-                            <div class="structure-card border-accent/20 bg-accent/5">
+                            <div class="structure-card" id="phase-2">
                                 <div class="text-accent font-bold text-[10px] tracking-widest mb-4 uppercase">Phase 02</div>
-                                <h4 class="font-700 text-lg mb-3">Workshop</h4>
-                                <p class="text-xs text-gray-300 leading-relaxed mb-6">High-intensity in-person sessions to build management skills.</p>
-                                <div class="text-[10px] font-bold text-accent uppercase">2 Days</div>
+                                <h4 class="font-700 text-lg mb-2">Workshop</h4>
+                                <p class="text-[11px] text-gray-400 leading-relaxed mb-4">High-intensity in-person sessions to build management skills.</p>
+                                <div class="text-[10px] font-bold text-gray-500 uppercase mt-auto">2 Days</div>
                             </div>
-                            <div class="structure-card">
+                            <div class="structure-card" id="phase-3">
                                 <div class="text-accent font-bold text-[10px] tracking-widest mb-4 uppercase">Phase 03</div>
-                                <h4 class="font-700 text-lg mb-3">Activation (PCA)</h4>
-                                <p class="text-xs text-gray-400 leading-relaxed mb-6">Structured real-world experiences to provide evidence of activation.</p>
-                                <div class="text-[10px] font-bold text-gray-500 uppercase">2-3 Hrs</div>
+                                <h4 class="font-700 text-lg mb-2">Activation (PCA)</h4>
+                                <p class="text-[11px] text-gray-400 leading-relaxed mb-4">Structured real-world experiences to provide evidence of activation.</p>
+                                <div class="text-[10px] font-bold text-gray-500 uppercase mt-auto">3 Cycles</div>
                             </div>
                         </div>
+                        <div class="progress-track"><div id="progress-bar"></div></div>
                     </div>
                 </div>
-                <div class="hidden lg:flex lg:col-span-1 justify-center">
-                    <i class="fa-solid fa-chevron-right text-white/20 text-3xl"></i>
-                </div>
-                <div class="lg:col-span-2">
-                    <div class="structure-card border-white/20 bg-white/5">
-                        <div class="text-white font-bold text-[10px] tracking-widest mb-4 opacity-50 uppercase">Phase 04</div>
-                        <h4 class="font-700 text-lg mb-3">Validation</h4>
-                        <p class="text-xs text-gray-400 leading-relaxed mb-6">Final assessment and production of Completion Report.</p>
-                        <div class="text-[10px] font-bold text-gray-500 uppercase">Milestone</div>
+
+                <div class="lg:col-span-3">
+                    <div class="structure-card border-white/20 flex flex-col" id="phase-4">
+                        <div class="text-gray-500 font-bold text-[10px] tracking-widest mb-4 uppercase">Phase 04</div>
+                        <h4 class="font-700 text-lg mb-2">Validation</h4>
+                        <p class="text-[11px] text-gray-400 leading-relaxed mb-4">Final assessment and production of Completion Report for the organisation.</p>
+                        <div class="text-[10px] font-bold text-gray-600 uppercase mt-auto">Milestone</div>
                     </div>
                 </div>
             </div>
@@ -320,7 +303,7 @@
 
     <!-- Footer -->
     <footer class="py-24 px-6 text-center border-t border-white/10">
-        <img src="https://lh3.googleusercontent.com/d/1vpIwCYBeUexg-kAbqLLRV5_j23dIRRDM" alt="Dragonpass Full Logo" class="h-12 mx-auto mb-10 opacity-90">
+        <img src="https://lh3.googleusercontent.com/d/1vpIwCYBeUexg-kAbqLLRV5_j23dIRRDM" alt="Logo" class="h-12 mx-auto mb-10 opacity-90">
         <p class="text-gray-400 text-lg md:text-xl mb-12 font-light italic max-w-3xl mx-auto leading-relaxed">
             "You are the catalyst for high performance. Our role is to ensure you are the kind of manager people <span class="text-white font-semibold">want</span> to work for, not just the one they <span class="text-white font-semibold">have</span> to work for."
         </p>
@@ -328,5 +311,55 @@
         <p class="text-[10px] text-gray-500 uppercase tracking-[0.4em] font-bold">Dragonpass Global Leadership & Performance</p>
     </footer>
 
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        // 1. Scrubber
+        const slider = document.getElementById('impact-slider');
+        const stats = [
+            { el: document.getElementById('stat-1'), max: 69 },
+            { el: document.getElementById('stat-2'), max: 75 },
+            { el: document.getElementById('stat-3'), max: 50 }
+        ];
+        slider.addEventListener('input', (e) => {
+            const val = e.target.value / 100;
+            stats.forEach(s => s.el.innerText = Math.floor(s.max * val) + '%');
+        });
+
+        // 2. Iterative Structure Logic
+        const progressBar = document.getElementById('progress-bar');
+        const cycleBadge = document.getElementById('cycle-badge');
+        const phases = [document.getElementById('phase-1'), document.getElementById('phase-2'), document.getElementById('phase-3')];
+        const phase4 = document.getElementById('phase-4');
+
+        ScrollTrigger.create({
+            trigger: "#structure",
+            start: "top 40%",
+            end: "bottom 60%",
+            scrub: 1,
+            onUpdate: (self) => {
+                const p = self.progress;
+                if (p < 0.8) {
+                    const loopProgress = (p / 0.8) * 3;
+                    const currentCycle = Math.floor(loopProgress) + 1;
+                    const cycleP = (loopProgress % 1) * 100;
+                    if(currentCycle <= 3) {
+                        cycleBadge.innerText = `Cycle ${currentCycle} / 3`;
+                        progressBar.style.width = cycleP + '%';
+                        phases.forEach((card, i) => {
+                            const threshold = (i / phases.length) * 100;
+                            card.classList.toggle('active-card', cycleP > threshold);
+                        });
+                        phase4.classList.remove('active-card');
+                    }
+                } else {
+                    cycleBadge.innerText = "Sprints Complete";
+                    progressBar.style.width = "100%";
+                    phases.forEach(card => card.classList.remove('active-card'));
+                    phase4.classList.add('active-card');
+                }
+            }
+        });
+    </script>
 </body>
 </html>
