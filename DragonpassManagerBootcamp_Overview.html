@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dragonpass | Manager Bootcamp Facilitator Brief</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --dp-dark: #0A2333;
+            --dp-slate: #134A61;
+            --dp-accent: #FA4A3D;
+        }
+        body {
+            background-color: var(--dp-dark);
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+        .text-accent { color: var(--dp-accent); }
+        .bg-accent { background-color: var(--dp-accent); }
+        
+        .module-card {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .module-card:hover {
+            transform: translateY(-5px);
+            background: rgba(19, 74, 97, 0.25);
+        }
+
+        .stat-card {
+            background: linear-gradient(145deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%);
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s ease;
+        }
+        .stat-card:hover { border-color: var(--dp-accent); transform: scale(1.02); }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .video-container iframe {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+        }
+
+        .dna-card {
+            border-top: 1px solid rgba(255,255,255,0.05);
+            transition: all 0.3s ease;
+        }
+        .dna-card:hover {
+            background: rgba(255,255,255,0.02);
+        }
+        .icon-box {
+            min-width: 40px;
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body class="antialiased font-[400]">
+
+    <!-- Navigation -->
+    <nav class="p-6 flex justify-between items-center sticky top-0 bg-[#0A2333]/95 backdrop-blur-md z-50 border-b border-white/10">
+        <img src="https://lh3.googleusercontent.com/d/1rBp_LTJuenhQflR1woUzA6Ep4e_jWw7I" alt="Dragonpass Logo" class="h-8">
+        <div class="hidden md:flex space-x-8 text-[10px] font-bold uppercase tracking-[0.2em]">
+            <a href="#vision" class="hover:text-accent transition">Vision</a>
+            <a href="#data" class="hover:text-accent transition">The Opportunity</a>
+            <a href="#modules" class="hover:text-accent transition">Modules</a>
+            <a href="https://dragonpassuk-my.sharepoint.com/:b:/g/personal/gareth_ogden_dragonpass_com/IQAXqR34ZEAsQbupRmL1tgxtAfK8FEdnmBH0YfuiO4Q_vw4?e=VX5Huo" target="_blank" class="text-accent underline decoration-2 underline-offset-4">White Paper</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header id="vision" class="relative min-h-[85vh] flex flex-col items-center justify-center px-6 text-center">
+        <img src="https://lh3.googleusercontent.com/d/1vpIwCYBeUexg-kAbqLLRV5_j23dIRRDM" alt="Dragonpass Full Logo" class="h-16 md:h-20 mb-12">
+        
+        <h1 class="text-6xl md:text-8xl font-800 mb-8 leading-tight tracking-tight">
+            Manager <br class="hidden md:block"> <span class="text-accent">Bootcamp</span>
+        </h1>
+        <p class="text-lg md:text-2xl text-gray-300 mb-12 font-light max-w-3xl mx-auto leading-relaxed">
+            Professionalising the internal hardware of leadership through research-led, high-utility craft.
+        </p>
+        <div class="flex flex-col sm:flex-row justify-center gap-6">
+            <a href="#video" class="bg-accent hover:bg-red-600 text-white px-10 py-5 rounded-xl font-bold transition-all shadow-lg shadow-accent/20 flex items-center justify-center gap-2">
+                <i class="fa-solid fa-play text-sm"></i> Watch Trailer
+            </a>
+            <a href="#data" class="bg-white/5 hover:bg-white/10 border border-white/20 text-white px-10 py-5 rounded-xl font-bold transition-all flex items-center justify-center">
+                The Opportunity
+            </a>
+        </div>
+    </header>
+
+    <!-- Data / Opportunity Section -->
+    <section id="data" class="py-32 px-6 bg-white/[0.02]">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-20">
+                <h2 class="text-4xl font-800 mb-6">The Management Gap</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto font-light leading-relaxed">The way we manage our people—our single most valuable asset—is the biggest opportunity we have at Dragonpass. The data highlights a critical need for a new standard of craft.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="stat-card p-10 rounded-2xl text-center">
+                    <div class="text-6xl font-800 text-accent mb-4">69%</div>
+                    <p class="text-sm text-gray-300 font-light">of managers are uncomfortable providing direct feedback to their teams.</p>
+                </div>
+                <div class="stat-card p-10 rounded-2xl text-center">
+                    <div class="text-6xl font-800 text-accent mb-4">75%</div>
+                    <p class="text-sm text-gray-300 font-light">of companies are currently struggling with overwhelmed employees.</p>
+                </div>
+                <div class="stat-card p-10 rounded-2xl text-center">
+                    <div class="text-6xl font-800 text-accent mb-4">50%</div>
+                    <p class="text-sm text-gray-300 font-light">of people who quit their jobs cite their manager as the primary reason.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Section -->
+    <section id="video" class="py-24 px-6 bg-[#081b27]">
+        <div class="max-w-5xl mx-auto">
+            <div class="flex flex-col md:flex-row items-center justify-between mb-12 gap-6">
+                <h2 class="text-3xl font-700">The Trailer</h2>
+                <div class="h-px flex-grow bg-white/10 mx-8 hidden md:block"></div>
+                <div class="text-accent font-mono text-xs tracking-widest uppercase">Duration: 01:00</div>
+            </div>
+            <div class="video-container">
+                <iframe src="https://drive.google.com/file/d/1dC1rREoBJPjnQ76hxgu9zkv_Bza2d_Fy/preview" allow="autoplay"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Core Muscles -->
+    <section id="modules" class="py-32 px-6">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-20">
+                <h2 class="text-4xl md:text-5xl font-800 mb-6 tracking-tight">The Core Muscles</h2>
+                <p class="text-gray-400 text-lg max-w-2xl mx-auto font-light leading-relaxed">
+                    Three modules connected by a single, vital vehicle: <span class="text-white font-semibold italic">One-to-Ones</span>.
+                </p>
+            </div>
+
+            <div class="grid lg:grid-cols-3 gap-10">
+                <div class="module-card p-10 bg-white/5 rounded-2xl border border-white/10 flex flex-col h-full">
+                    <div class="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center text-accent font-800 mb-8">01</div>
+                    <h3 class="text-2xl font-700 mb-6 leading-tight">Defining & Setting Expectations</h3>
+                    <p class="text-gray-400 mb-8 leading-relaxed font-light flex-grow">Eliminating the "Ambiguity Trap" through data-driven Role Maturity Assessments and the Triad of Expectations.</p>
+                    <div class="space-y-4 pt-6 border-t border-white/5 text-xs font-medium text-gray-300">
+                        <div class="flex items-center gap-3"><i class="fa-solid fa-microchip text-accent/60"></i> Maturity Diagnostics</div>
+                        <div class="flex items-center gap-3"><i class="fa-solid fa-robot text-accent/60"></i> AI KSB Calibration</div>
+                        <div class="flex items-center gap-3"><i class="fa-solid fa-compass text-accent/60"></i> The OCT Framework</div>
+                    </div>
+                </div>
+
+                <div class="module-card p-10 bg-white/5 rounded-2xl border border-white/10 flex flex-col h-full">
+                    <div class="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center text-accent font-800 mb-8">02</div>
+                    <h3 class="text-2xl font-700 mb-6 leading-tight">Productive Conversations</h3>
+                    <p class="text-gray-400 mb-8 leading-relaxed font-light flex-grow">Reframing "difficult" meetings into objective performance dialogues by linking every conversation back to pre-set standards.</p>
+                    <div class="space-y-4 pt-6 border-t border-white/5 text-xs font-medium text-gray-300">
+                        <div class="flex items-center gap-3"><i class="fa-solid fa-shield-halved text-accent/60"></i> Conflict Neutralisation</div>
+                        <div class="flex items-center gap-3"><i class="fa-solid fa-bolt text-accent/60"></i> High-Utility Feedback</div>
+                        <div class="flex items-center gap-3"><i class="fa-solid fa-gauge-high text-accent/60"></i> Performance Steering</div>
+                    </div>
+                </div>
+
+                <div class="module-card p-10 bg-white/5 rounded-2xl border border-white/10 flex flex-col h-full">
+                    <div class="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center text-accent font-800 mb-8">03</div>
+                    <h3 class="text-2xl font-700 mb-6 leading-tight">High Performing Teams</h3>
+                    <p class="text-gray-400 mb-8 leading-relaxed font-light flex-grow">Moving beyond "Professional Politeness" to build a culture of Vulnerability-Based Trust and Peer-to-Peer Accountability.</p>
+                    <div class="space-y-4 pt-6 border-t border-white/5 text-xs font-medium text-gray-300">
+                        <div class="flex items-center gap-3"><i class="fa-solid fa-handshake-angle text-accent/60"></i> Vulnerability-Based Trust</div>
+                        <div class="flex items-center gap-3"><i class="fa-solid fa-fire-flame-curved text-accent/60"></i> Healthy Ideological Conflict</div>
+                        <div class="flex items-center gap-3"><i class="fa-solid fa-users-viewfinder text-accent/60"></i> Peer-to-Peer Accountability</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Methodology DNA -->
+    <section id="delivery" class="py-32 px-6 bg-white/[0.02]">
+        <div class="max-w-5xl mx-auto">
+            <h2 class="text-4xl font-800 mb-16 text-center">The Delivery DNA</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="dna-card p-8 rounded-2xl flex gap-6">
+                    <div class="icon-box text-accent text-2xl pt-1"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+                    <div>
+                        <h4 class="font-700 mb-2 text-lg">AI-Driven Workflows</h4>
+                        <p class="text-gray-400 text-sm leading-relaxed font-light">Facilitators navigate our proprietary Prompt Library to help managers build bespoke performance standards in real-time.</p>
+                    </div>
+                </div>
+                <div class="dna-card p-8 rounded-2xl flex gap-6">
+                    <div class="icon-box text-accent text-2xl pt-1"><i class="fa-solid fa-flask"></i></div>
+                    <div>
+                        <h4 class="font-700 mb-2 text-lg">Research-Led Analysis</h4>
+                        <p class="text-gray-400 text-sm leading-relaxed font-light">No "fluff." Every insight is grounded in data, evidence-based diagnostics, and 13-page maturity reports.</p>
+                    </div>
+                </div>
+                <div class="dna-card p-8 rounded-2xl flex gap-6">
+                    <div class="icon-box text-accent text-2xl pt-1"><i class="fa-solid fa-comments"></i></div>
+                    <div>
+                        <h4 class="font-700 mb-2 text-lg">Language Immersion</h4>
+                        <p class="text-gray-400 text-sm leading-relaxed font-light">Post-Course Actions (PCA) ensure managers don't just learn theory—they "speak" the language in their daily remit.</p>
+                    </div>
+                </div>
+                <div class="dna-card p-8 rounded-2xl flex gap-6">
+                    <div class="icon-box text-accent text-2xl pt-1"><i class="fa-solid fa-rocket"></i></div>
+                    <div>
+                        <h4 class="font-700 mb-2 text-lg">The Performance Catalyst</h4>
+                        <p class="text-gray-400 text-sm leading-relaxed font-light">We believe the manager's role is the catalyst for high performance across the entire organisation.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-24 px-6 text-center border-t border-white/10">
+        <img src="https://lh3.googleusercontent.com/d/1vpIwCYBeUexg-kAbqLLRV5_j23dIRRDM" alt="Dragonpass Full Logo" class="h-12 mx-auto mb-10 opacity-90">
+        <p class="text-gray-400 text-lg md:text-xl mb-12 font-light italic max-w-3xl mx-auto leading-relaxed">
+            "You are the catalyst for high performance. Our role is to ensure you are the kind of manager people <span class="text-white font-semibold">want</span> to work for, not just the one they <span class="text-white font-semibold">have</span> to work for."
+        </p>
+        <div class="w-16 h-1 bg-accent mx-auto mb-10"></div>
+        <p class="text-[10px] text-gray-500 uppercase tracking-[0.4em] font-bold">Dragonpass Global Leadership & Performance</p>
+    </footer>
+
+</body>
+</html>
